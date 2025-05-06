@@ -10,8 +10,8 @@ const TestimonialContent = () => {
       <div className="integration_text saas2-headline pera-content">
         <span className="feature_tag">Depoimentos</span>
         <h2>
-          <span>A voz dos Nossos</span>
-          Associados!
+          <span>A voz dos Nossos Associados!</span>
+          
         </h2>
         <p>
           Esses são apenas alguns dos elogios que aquecem nossos corações e nos 
