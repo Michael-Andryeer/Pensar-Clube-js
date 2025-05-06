@@ -1,4 +1,5 @@
 import React from 'react';
+import './ActionButtons.css';
 
 const ActionButtons = () => {
   return (
@@ -16,8 +17,8 @@ const ActionButtons = () => {
           </li>
         </ul>
       </nav>
-      <div className="saas_sign_up_btn text-center">
-        <a href="#boleto">2ª Via do boleto</a>
+      <div className="boleto-link-container">
+        <a href="#boleto" className="boleto-link">2ª Via do boleto</a>
       </div>
     </div>
   );
