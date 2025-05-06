@@ -10,8 +10,6 @@ import "./assets/libs/popper.min.js"
 import "./assets/libs/pwr.js"
 import React from "react"
 
-
-
 export function Layout() {
   <header id="header_main" className="saas_two_main_header">
         <div className="container">
