@@ -1,4 +1,5 @@
 import Banner from './components/Banner/Banner';
+import FeatureSection from './components/FeatureSection/FeatureSection';
 import { Header } from './components/Header/Header';
 import ServicesSection from './components/ServiceSection/ServiceSection';
 
@@ -8,6 +9,7 @@ function App() {
       <Header/>
       <Banner/>
       <ServicesSection/>
+      <FeatureSection />
     </div>
   );
 }
