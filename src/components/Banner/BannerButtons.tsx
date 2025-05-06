@@ -11,7 +11,7 @@ const BannerButtons = () => {
           <li>
             <a href="https://pensarclubeapp.flutterflow.app/" className="saber">
               <img 
-                src="assets/img/svg.svg" 
+                src="/images/svg.svg" 
                 alt="Imagem" 
                 className="icon"
                 style={{ marginRight: '10px', verticalAlign: 'middle' }}
