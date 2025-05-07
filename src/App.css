@@ -5,6 +5,13 @@
   text-align: center;
 }
 
+.react-modal-fix {
+  position: fixed !important;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  z-index: 1050 !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

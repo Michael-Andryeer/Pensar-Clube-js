@@ -106,6 +106,194 @@ theme.
     -moz-osx-font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
   }
+
+  .vehicle-type-group {
+    display: flex;
+    gap: 20px; /* Aumente o valor para mais espaço */
+    margin-bottom: 18px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .vehicle-type-btn {
+    flex: 1;
+    padding: 16px 0;
+    border: 2px solid #d1d5db;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: border 0.2s, background 0.2s, color 0.2s;
+    outline: none;
+    text-align: center;
+    user-select: none;
+    margin: 0; /* Remove qualquer margem lateral */
+  }
+  
+  .vehicle-type-btn.selected,
+  .vehicle-type-btn:focus {
+    border: 2px solid #4a1818;
+    background: #4a1818;
+    color: #fff;
+  }
+  
+  .group-form label {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  
+  select, input[type="text"], input[type="email"] {
+    font-size: 1rem;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1.5px solid #ccc;
+    transition: border 0.2s;
+  }
+  
+  select:focus, input[type="text"]:focus, input[type="email"]:focus {
+    border: 1.5px solid #4a1818;
+    outline: none;
+  }
+  
+  @media (max-width: 500px) {
+    .vehicle-type-btn { font-size: 1.1rem; padding: 10px 0; }
+  }
+
+
+  .react-modal-fix.modalaberto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999; /* Bem alto para garantir que fique na frente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-content {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px 32px 24px 32px;
+    max-width: 400px;
+    width: 90vw;
+    z-index: 10000;
+    outline: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+
+  box-call-to-action-form.pwr_form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  select {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 14px 0;
+    border: none;
+    border-radius: 28px;
+    background: #4a1818;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+  
+  .button:hover {
+    background: #6a2323;
+  }
+  
+  .close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    z-index: 2;
+  }
+  
+  @media (max-width: 500px) {
+    .modal-content {
+      max-width: 98vw;
+      padding: 18px 6vw 18px 6vw;
+    }
+  }
+
+  /* Backdrop customizado */
+.modal-backdrop-custom {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998; /* Um abaixo do modal */
+}
+
+  .react-modal-fix {
+    position: fixed !important;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 99999999 !important; /* valor bem alto para garantir sobreposição */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-dialog {
+    z-index: 99999999 !important;
+    margin: 0 auto;
+  }
+  
+  .modal-backdrop-custom {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99999999;
+  }
+
   .app-eight-home::selection {
     color: #ffffff;
     background-color: #6e3ebf;

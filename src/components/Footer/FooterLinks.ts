@@ -47,3 +47,4 @@ export const socialLinks = [
     url: "https://wa.me/558430134747"
   }
 ];
+
