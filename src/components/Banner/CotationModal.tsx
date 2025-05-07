@@ -514,21 +514,54 @@ const CotationModal: React.FC<CotationModalProps> = ({ isOpen, onClose }) => {
               </select>
             </div>
             <div className="group-form">
-              <label>Você usa o seu veículo em Taxi ou Aplicativo?</label>
-              <div className="box-input">
-                <input
-                  id="pwr_field_uber"
-                  type="checkbox"
-                  className="option-input checkbox"
-                  checked={uber}
-                  onChange={e => setUber(e.target.checked)}
-                />
-                <label htmlFor="pwr_field_uber" style={{ display: "flex", alignItems: "center" }}>
-                  <span style={{ fontWeight: 500, marginRight: "5px" }}>Sim</span>
+              <label style={{marginBottom: "10px", display: "block"}}>
+                Você usa o seu veículo em Taxi ou Aplicativo?
+              </label>
+              <div 
+                className="box-input" 
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: "10px",
+                  border: "1px solid #e0e0e0",
+                  borderRadius: "4px",
+                  backgroundColor: "#f9f9f9"
+                }}
+              >
+                <div style={{position: "relative", marginRight: "12px"}}>
+                  <input
+                    id="pwr_field_uber"
+                    type="checkbox"
+                    className="option-input checkbox"
+                    checked={uber}
+                    onChange={e => setUber(e.target.checked)}
+                    style={{
+                      width: "20px",
+                      height: "20px",
+                      cursor: "pointer"
+                    }}
+                  />
+                </div>
+                <label 
+                  htmlFor="pwr_field_uber" 
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    userSelect: "none"
+                  }}
+                >
                   <span style={{ 
-                    fontSize: "0.85em", 
-                    color: "#666", 
-                    fontStyle: "italic"
+                    fontWeight: 600, 
+                    marginRight: "8px",
+                    fontSize: "0.95rem",
+                    color: "#222"
+                  }}>
+                    Sim
+                  </span>
+                  <span style={{ 
+                    fontSize: "0.85rem", 
+                    color: "#666",
                   }}>
                     (deixe desmarcado caso não utilize)
                   </span>
