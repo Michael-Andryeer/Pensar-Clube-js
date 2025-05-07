@@ -18043,6 +18043,25 @@ SaaSio - HR Management
   display: none;
 }
 
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.checkbox-label {
+  font-weight: 500;
+}
+
+.note {
+  font-size: 0.85rem;
+  color: #6c757d; /* cinza suave */
+  display: block;
+  margin-left: 1.8rem; /* alinhar com a label */
+}
+
+
 
 .modal-custom {
   position: fixed;

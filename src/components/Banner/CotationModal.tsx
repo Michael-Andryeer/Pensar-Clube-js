@@ -128,6 +128,9 @@ const CotationModal: React.FC<CotationModalProps> = ({ isOpen, onClose }) => {
       setCities([]);
       setQuotationCode(null);
       setSuccessMessage(null);
+      
+      // Remover qualquer URL de redirecionamento armazenada
+      localStorage.removeItem('redirectUrl');
     }
   }, [isOpen]);
 
@@ -197,25 +200,64 @@ const CotationModal: React.FC<CotationModalProps> = ({ isOpen, onClose }) => {
       cty: Number(city),
       workVehicle: uber
     };
-    const res = await fetch("https://app.powercrm.com.br/qttnStep3", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    if (data.id <= 0) {
-      alert(data.text || "Erro ao finalizar cotação.");
-    } else {
-      setSuccessMessage("Cotação enviada com sucesso! Você será redirecionado em instantes.");
-      setTimeout(() => {
-        if (data.id === 1) {
-          window.location.href = `https://app.powercrm.com.br/newQuotation?h=${data.text}`;
-        } else {
-          window.location.href = `https://app.powercrm.com.br/receivedQuotation?h=${data.text}`;
-        }
-      }, 2500); // 2,5 segundos de mensagem antes do redirecionamento
+    
+    try {
+      const res = await fetch("https://app.powercrm.com.br/qttnStep3", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      
+      if (data.id <= 0) {
+        alert(data.text || "Erro ao finalizar cotação.");
+      } else {
+        // Definimos a mensagem de sucesso, sem tentar redirecionar automaticamente
+        setSuccessMessage("Cotação enviada com sucesso!");
+        
+        // Armazenamos a URL para redirecionamento em localStorage
+        // para poder recuperá-la quando o usuário clicar no botão
+        localStorage.setItem('redirectUrl', `https://app.powercrm.com.br/noPlan?h=${COMPANY_HASH}&=undefined`);
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      alert("Ocorreu um erro ao enviar a cotação. Tente novamente.");
     }
   }
+  
+  // Função de redirecionamento totalmente reescrita
+  const handleRedirect = () => {
+    try {
+      // Tenta recuperar a URL do localStorage
+      const redirectUrl = localStorage.getItem('redirectUrl') || 
+        `https://app.powercrm.com.br/noPlan?h=${COMPANY_HASH}&=undefined`;
+      
+      // Limpa o localStorage para evitar problemas em futuras interações
+      localStorage.removeItem('redirectUrl');
+      
+      // Usa window.open que tem melhor compatibilidade com políticas de popup
+      window.open(redirectUrl, '_self');
+      
+      // Método alternativo se window.open não funcionar
+      setTimeout(() => {
+        if (document.hasFocus()) { // Se ainda estiver na mesma página após 100ms
+          const a = document.createElement('a');
+          a.href = redirectUrl;
+          a.target = '_self';
+          a.rel = 'noopener noreferrer';
+          a.style.display = 'none';
+          document.body.appendChild(a);
+          a.click();
+          setTimeout(() => {
+            document.body.removeChild(a);
+          }, 100);
+        }
+      }, 100);
+    } catch (e) {
+      console.error("Erro ao redirecionar:", e);
+      alert("Houve um problema ao redirecionar. Por favor, clique novamente no botão ou copie este link: https://app.powercrm.com.br/noPlan?h=" + COMPANY_HASH);
+    }
+  };
 
   return (
     <Modal
@@ -263,6 +305,39 @@ const CotationModal: React.FC<CotationModalProps> = ({ isOpen, onClose }) => {
               <path d="M7 13l3 3 7-7" stroke="#4a1818" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <div style={{marginTop: 16}}>{successMessage}</div>
+            
+            {/* Botão de redirecionamento com estilo mais destacado */}
+            <div style={{marginTop: 24, width: "100%", maxWidth: 300}}>
+              <p style={{fontSize: "0.9rem", marginBottom: 10, color: "#666"}}>
+                Para continuar e ver suas cotações disponíveis, clique no botão abaixo:
+              </p>
+              <a 
+                href={`https://app.powercrm.com.br/noPlan?h=${COMPANY_HASH}&=undefined`}
+                target="_self"
+                rel="noopener noreferrer"
+                style={{
+                  display: "block",
+                  padding: "15px 20px",
+                  width: "100%",
+                  fontSize: "1.1rem",
+                  backgroundColor: "#4a1818",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
+                  transition: "all 0.2s ease",
+                  textAlign: "center",
+                  textDecoration: "none"
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleRedirect();
+                }}
+              >
+                Ver cotações disponíveis
+              </a>
+            </div>
           </div>
         ) : (
         <>
@@ -441,8 +516,15 @@ const CotationModal: React.FC<CotationModalProps> = ({ isOpen, onClose }) => {
                   checked={uber}
                   onChange={e => setUber(e.target.checked)}
                 />
-                <label htmlFor="pwr_field_uber">
-                  Sim <small>(deixe desmarcado se não usar)</small>
+                <label htmlFor="pwr_field_uber" style={{ display: "flex", alignItems: "center" }}>
+                  <span style={{ fontWeight: 500, marginRight: "5px" }}>Sim</span>
+                  <span style={{ 
+                    fontSize: "0.85em", 
+                    color: "#666", 
+                    fontStyle: "italic"
+                  }}>
+                    (deixe desmarcado caso não utilize)
+                  </span>
                 </label>
               </div>
             </div>
