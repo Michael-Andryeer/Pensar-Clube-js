@@ -29,4 +29,21 @@ export const footerLinks = [
   }
 ];
 
-// ...existing code for socialLinks...
+
+export const socialLinks = [
+  {
+    icon: "fab fa-facebook-f",
+    className: "facebook",
+    url: "https://facebook.com/"
+  },
+  {
+    icon: "fab fa-instagram",
+    className: "instagram",
+    url: "https://www.instagram.com/pensarclubeoficial?igsh=MTR5NHB0cmZ2OHM2Mw=="
+  },
+  {
+    icon: "fab fa-whatsapp",
+    className: "whatsapp",
+    url: "https://wa.me/558430134747"
+  }
+];
